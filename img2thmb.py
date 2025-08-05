@@ -1,16 +1,15 @@
 from PIL import Image
-import os
+import os, glob
 
-#archive_path = os.path.abspath(r"/home/matthew/pic_archive/2025/DSC05946.JPG")
-#img_path = os.path.
 archive_path = r"/home/matthew/pic_archive"
-img_path = r"2025/DSC05946.JPG"
-
-print(os.path.join(archive_path, img_path))
-
-img = Image.open(os.path.join(archive_path, img_path))
+years = ("2023", "2024", "2025")
 thmb_size = (100,100)
-img.thumbnail(thmb_size)
-
-thmb_path = r"thmb_2025/DSC05946.JPG"
-img.save(os.path.join(archive_path, thmb_path))
+for y in years:
+    year_path = os.path.join(archive_path, y)
+    thmb_year = "thmb" + y
+    for file in glob.glob(os.path.join(year_path, "*.JPG")):
+        # file example: "/home/matthew/pic_archive/2025/DSC05986.JPG"
+        img = Image.open(file)
+        img.thumbnail(thmb_size)
+        thmb_path = os.path.join(archive_path, thmb_year, os.path.basename(file))
+        img.save(thmb_path)

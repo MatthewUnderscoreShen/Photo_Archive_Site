@@ -5,12 +5,12 @@ import os
 import argparse
 
 archive_path = r"/home/matthew/pic_archive"
-thumb_size = (100,100)
 
 # year: str of the folder name (a year)
-def generate_thumbnails(year):
-    year_path = os.path.join(archive_path, year)
-    thumb_year = "thumb" + year
+def generate_thumbnails(year, size):
+    thumb_size = (size, size)
+    year_path = os.path.join(archive_path, "images", year)
+    thumb_year = os.path.join(archive_path, "thumbnails", year)
     try:
         os.mkdir(thumb_year)
     except FileExistsError:
@@ -22,13 +22,12 @@ def generate_thumbnails(year):
         if os.path.isfile(full_path):
             img = Image.open(full_path)
             img.thumbnail(thumb_size)
-            thumb_path = os.path.join(archive_path, thumb_year, os.path.basename(full_path))
+            thumb_path = os.path.join(thumb_year, os.path.basename(full_path))
             img.save(thumb_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("year", help="the year of images to create thumbnails of")
+    parser.add_argument("size", type=int, help="size of the thumbnail (square)")
     args = parser.parse_args()
-    years = args.year
-    for y in years:
-        generate_thumbnails(years)
+    generate_thumbnails(args.year, args.size)

@@ -1,16 +1,40 @@
+# A script to take images and convert them to thumbnails
+# 
 from PIL import Image
 import os
+import argparse
+import sys
 
-#archive_path = os.path.abspath(r"/home/matthew/pic_archive/2025/DSC05946.JPG")
-#img_path = os.path.
-archive_path = r"/home/matthew/pic_archive"
-img_path = r"2025/DSC05946.JPG"
+# year: str of the folder name (a year)
+def generate_thumbnails(year, size):
+    thumb_size = (size, size)
+    image_year_dir = os.path.join("images", year)
+    thumb_year_dir = os.path.join("thumbnails", year)
+    try:
+        os.mkdir(thumb_year_dir)
+    except FileExistsError:
+        pass
 
-print(os.path.join(archive_path, img_path))
+    try:
+        for file in os.listdir(image_year_dir):
+            # file example: "/home/matthew/pic_archive/images/2025/DSC05986.JPG"
+            image_full_path = os.path.join(image_year_dir, file)
+            if not os.path.isfile(image_full_path):
+                continue
+            
+            img = Image.open(image_full_path)
+            img.thumbnail(thumb_size)
+            thumb_full_path = os.path.join(thumb_year_dir, file)
+            img.save(thumb_full_path)
+    except FileNotFoundError:
+        print(f"Specified image folder '{image_year_dir}' does not exist")
+        sys.exit(1)
 
-img = Image.open(os.path.join(archive_path, img_path))
-thmb_size = (100,100)
-img.thumbnail(thmb_size)
-
-thmb_path = r"thmb_2025/DSC05946.JPG"
-img.save(os.path.join(archive_path, thmb_path))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("year", help="the year of images to create thumbnails of")
+    parser.add_argument("size", type=int, help="size of the thumbnail (square)",
+                        default=150)
+    args = parser.parse_args()
+    generate_thumbnails(args.year, args.size)
+    print(args.year + " done")

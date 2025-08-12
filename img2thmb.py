@@ -3,6 +3,7 @@
 from PIL import Image
 import os
 import argparse
+import sys
 
 # year: str of the folder name (a year)
 def generate_thumbnails(year, size):
@@ -13,17 +14,21 @@ def generate_thumbnails(year, size):
         os.mkdir(thumb_year_dir)
     except FileExistsError:
         pass
-    
-    for file in os.listdir(image_year_dir):
-        # file example: "/home/matthew/pic_archive/images/2025/DSC05986.JPG"
-        image_full_path = os.path.join(image_year_dir, file)
-        if not os.path.isfile(image_full_path):
-            continue
-        
-        img = Image.open(image_full_path)
-        img.thumbnail(thumb_size)
-        thumb_full_path = os.path.join(thumb_year_dir, os.path.basename(image_full_path))
-        img.save(thumb_full_path)
+
+    try:
+        for file in os.listdir(image_year_dir):
+            # file example: "/home/matthew/pic_archive/images/2025/DSC05986.JPG"
+            image_full_path = os.path.join(image_year_dir, file)
+            if not os.path.isfile(image_full_path):
+                continue
+            
+            img = Image.open(image_full_path)
+            img.thumbnail(thumb_size)
+            thumb_full_path = os.path.join(thumb_year_dir, file)
+            img.save(thumb_full_path)
+    except FileNotFoundError:
+        print(f"Specified image folder '{image_year_dir}' does not exist")
+        sys.exit(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

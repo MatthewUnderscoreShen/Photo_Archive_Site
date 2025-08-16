@@ -60,7 +60,6 @@ def generate_image_html():
     return html_images
 
 if __name__ == "__main__":
-    file_desc = os.open("index_test.html", os.O_CREAT | os.O_TRUNC | os.O_RDWR)
-    print(html_head + generate_image_html() + html_tail)
     html_full = html_head + generate_image_html() + html_tail
-    os.write(file_desc, html_full.encode("utf-8"))
+    with open("index_test.html", "w") as f:
+        f.write(html_full)

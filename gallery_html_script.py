@@ -2,8 +2,6 @@
 import os
 import sys
 
-file_desc = os.open("index_test.html", os.O_CREAT | os.O_TRUNC | os.O_WRONLY)
-
 # start of the html file
 html_head = """<!DOCTYPE html>
 <html>
@@ -57,9 +55,10 @@ def generate_image_html():
             if not os.path.isfile(os.path.join("images", year, file)):
                 continue
             html_images += f"\t\t<a href=\"images/{image_path_tail}\"><img src=\"thumbnails/{image_path_tail}\" alt=\"picture\"></a>\n"
-    return html_images
 
-if __name__ == "__main__":
-    html_full = html_head + generate_image_html() + html_tail
+    html_full = html_head + html_images + html_tail
     with open("index_test.html", "w") as f:
         f.write(html_full)
+
+if __name__ == "__main__":
+    generate_image_html()

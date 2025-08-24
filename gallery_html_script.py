@@ -7,6 +7,7 @@ html_head = """<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="gallery_style.css">
+    <script src="toggleGroup.js"></script>
     <title>Photo Gallery</title>
 </head>
 <body>
@@ -14,8 +15,7 @@ html_head = """<!DOCTYPE html>
 """
 
 # end of html file
-html_tail = """\t<script src="toggleGroup.js"></script>
-</body>
+html_tail = """</body>
 </html>
 """
 

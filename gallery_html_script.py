@@ -6,66 +6,15 @@ import sys
 html_head = """<!DOCTYPE html>
 <html>
 <head>
-    <title>a carolina reaper</title>
-    <style>
-        .buttons button {
-            color: black;
-            background-color:  #e7e7e7;
-            font-size: 24px;
-            border-radius: 8px;
-            transition: background 0.1s
-        }
-        .buttons button.active {
-            color: white;
-            background-color: #555555;
-        }
-        .image-year {
-            display: none;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .grid a {
-            display: block;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .grid a:hover {
-            transform: scale(1.25);
-        }
-
-        .grid img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="gallery_style.css">
+    <title>Photo Gallery</title>
 </head>
 <body>
-    <h1>dipped in</h1>
-    <p>mama liz's chili oil</p>
+    <h1>Photo Gallery</h1>
 """
 
 # end of html file
-html_tail = """\t<script>
-        function toggleGroup(id, button) {
-            const group = document.getElementById(id);
-            if (group.style.display === "none" || group.style.display === "") {
-                group.style.display = "block";
-                button.classList.add("active");
-            } else {
-                group.style.display = "none";
-                button.classList.remove("active");
-            }
-        }
-    </script>
+html_tail = """\t<script src="toggleGroup.js"></script>
 </body>
 </html>
 """

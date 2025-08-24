@@ -1,0 +1,42 @@
+<!-- index.html file for displaying a photo gallery website -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>a carolina reaper</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .grid a {
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .grid a:hover {
+            transform: scale(1.5);
+        }
+
+        .grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>dipped in</h1>
+    <p>mama liz's chili oil</p>
+    <div class="grid">
+        <a href="images/2023/DSC00032.JPG"><img src="thumbnails/2023/DSC00032.JPG" alt="picture"></a>
+        <a href="images/2023/DSC00138.JPG"><img src="thumbnails/2023/DSC00138.JPG" alt="picture"></a>
+        <a href="images/2023/DSC00139.JPG"><img src="thumbnails/2023/DSC00139.JPG" alt="picture"></a>
+    </div>
+</body>
+</html>

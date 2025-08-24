@@ -1,0 +1,38 @@
+.buttons button {
+    color: black;
+    background-color:  #e7e7e7;
+    font-size: 24px;
+    border-radius: 8px;
+    transition: background 0.1s
+}
+.buttons button.active {
+    color: white;
+    background-color: #555555;
+}
+.image-year {
+    display: none;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.grid a {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.grid a:hover {
+    transform: scale(1.25);
+}
+
+.grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}

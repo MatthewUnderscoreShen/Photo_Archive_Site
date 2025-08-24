@@ -1,6 +1,6 @@
 # A script to take images and convert them to thumbnails
 # 
-from PIL import Image
+from PIL import Image, ImageOps
 import os
 import argparse
 import sys
@@ -23,6 +23,7 @@ def generate_thumbnails(year, size):
                 continue
             
             img = Image.open(image_full_path)
+            img = ImageOps.exif_transpose(img)
             img.thumbnail(thumb_size)
             thumb_full_path = os.path.join(thumb_year_dir, file)
             img.save(thumb_full_path)
